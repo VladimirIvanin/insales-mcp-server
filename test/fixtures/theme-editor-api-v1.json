@@ -1,0 +1,480 @@
+{
+  "edit_context": {
+    "id": 21137,
+    "name": "v2-smoke-d1f9622a",
+    "widget_type_id": 12381741,
+    "widget_type_handle": "v2-smoke-d1f9622a",
+    "theme_id": 63,
+    "visible": true,
+    "html_id": null,
+    "settings": {},
+    "block_list_id": null,
+    "updated_at": "2026-11-11T12:00:00.123456Z",
+    "edit_context": {
+      "widget_updated_at": "2026-11-11T12:00:00.123456Z",
+      "block_list_updated_at": null,
+      "published": false,
+      "allowed_actions": [
+        "widget.update",
+        "widget.customize_code"
+      ],
+      "copy_required": true
+    },
+    "widget_type": {
+      "id": 12381741,
+      "type": "SimpleWidgetType",
+      "name": {
+        "ru": "v2-smoke-d1f9622a"
+      },
+      "description": {},
+      "handle": "v2-smoke-d1f9622a",
+      "sku": "CU0.1",
+      "generation": 4,
+      "system": false,
+      "preview_url": null,
+      "mobile_preview_url": null,
+      "theme_id": 63,
+      "widget_category_handle": "headers",
+      "block_template_handle": null,
+      "page_kinds": [
+        "all"
+      ],
+      "widget_list_kinds": [
+        "content"
+      ],
+      "libraries": [],
+      "updated_at": "2026-11-11T12:00:00.123456Z",
+      "source": {
+        "snippet_content": "<button class=\"v2-smoke-button\">{{ widget_settings.title }} / {{ widget_messages.hello }}</button>",
+        "snippet_scss": ".v2-smoke-button { background-color: var(--bg); padding: 20px; }",
+        "snippet_js": "$widget.find(\".v2-smoke-button\").on(\"click\", function () { this.dataset.clicked = \"yes\"; });",
+        "settings_form": "{\"content\":[{\"title\":\"Content\",\"items\":[{\"name\":\"title\",\"type\":\"text\",\"label\":\"Title\"}]}],\"design\":[{\"title\":\"Design\",\"items\":[{\"name\":\"bg\",\"type\":\"color\",\"label\":\"Color\"}]}]}",
+        "settings_data": "{\"title\":\"Default title\",\"bg\":\"#ff0000\"}",
+        "setup": null,
+        "messages": "{\"ru\":{\"hello\":\"Привет\"},\"en\":{\"hello\":\"Hello\"}}",
+        "block_settings_presets": null
+      }
+    },
+    "placements": [
+      {
+        "id": 2665,
+        "widget_list_id": 1665,
+        "position": 1
+      }
+    ]
+  },
+  "preview": {
+    "change_id": "aa6f440b-d890-43db-bc73-92112adeb7f2",
+    "theme_id": 63,
+    "rendered_at": "2026-10-02T07:56:50.947478+03:00",
+    "browser_checked": false,
+    "trust": "untrusted_theme_code",
+    "errors": [],
+    "warnings": [
+      {
+        "path": "widget_js_shared_state",
+        "code": "local_warning",
+        "message": "widget_js_shared_state: snippet.js:1 — $widget.find() объединяет экземпляры при локальном состоянии; создайте отдельное состояние в $widget.each()."
+      }
+    ]
+  },
+  "apply": {
+    "status": "pending_assets",
+    "outcome": "applied",
+    "request_digest": "9c6b290c460667b2af4e98a5611b21ac9cbee00f85197bea862eda6bbab15908",
+    "assets_refresh": {
+      "version": 1790917012,
+      "status": "pending"
+    },
+    "results": [
+      {
+        "id": 21137,
+        "name": "v2-smoke-d1f9622a",
+        "widget_type_id": 12381742,
+        "widget_type_handle": "api-21137-8dde40d45b",
+        "theme_id": 63,
+        "visible": true,
+        "html_id": null,
+        "settings": {},
+        "block_list_id": null,
+        "updated_at": "2026-11-11T12:00:00.123456Z",
+        "edit_context": {
+          "widget_updated_at": "2026-11-11T12:00:00.123456Z",
+          "block_list_updated_at": null,
+          "published": false,
+          "allowed_actions": [
+            "widget.update",
+            "widget.customize_code"
+          ],
+          "copy_required": false
+        },
+        "placements": [
+          {
+            "id": 2665,
+            "widget_list_id": 1665,
+            "position": 1
+          }
+        ],
+        "copied_widget_type": true,
+        "type": "widget.customize_code",
+        "index": 0
+      }
+    ],
+    "references": {},
+    "warnings": [],
+    "affected_theme_ids": [
+      63
+    ]
+  },
+  "preparation": {
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "checked_at": "2026-10-02T07:56:48.508373+03:00",
+    "commands": [
+      {
+        "type": "widget.customize_code",
+        "target": {
+          "id": 21137,
+          "expected_revision": "cccffe0d01c3eea73292d4a2ea2bdfe1d289a6d80a5a5bfdaeab01db7ff46322"
+        },
+        "attributes": {
+          "snippet_js": "$widget.find(\".v2-smoke-button\").on(\"click\", function () { this.dataset.clicked = \"changed\"; });"
+        }
+      }
+    ],
+    "request_digest": "9c6b290c460667b2af4e98a5611b21ac9cbee00f85197bea862eda6bbab15908",
+    "normalized": {},
+    "effects": [
+      {
+        "index": 0,
+        "type": "widget.customize_code",
+        "affected_theme_ids": [
+          63
+        ],
+        "widget_id": 21137,
+        "copy_required": true
+      }
+    ]
+  },
+  "receipt": {
+    "outcome": "applied",
+    "receipt_status": "completed",
+    "assets_enqueued": true,
+    "result": {
+      "status": "pending_assets",
+      "outcome": "applied",
+      "request_digest": "c7b8eb71117b2e34b44bd1422daaa2692666b4bb73ff787b7b64e27196d25407",
+      "assets_refresh": {
+        "version": 1790917014,
+        "status": "pending"
+      },
+      "results": [
+        {
+          "id": 21137,
+          "name": "v2-smoke-d1f9622a",
+          "widget_type_id": 12381742,
+          "widget_type_handle": "api-21137-8dde40d45b",
+          "theme_id": 63,
+          "visible": true,
+          "html_id": null,
+          "settings": {
+            "title": {
+              "ru": "Lost reply receipt"
+            },
+            "bg": "#00ff00"
+          },
+          "block_list_id": null,
+          "updated_at": "2026-11-11T12:00:00.123456Z",
+          "edit_context": {
+            "widget_updated_at": "2026-11-11T12:00:00.123456Z",
+            "block_list_updated_at": null,
+            "published": false,
+            "allowed_actions": [
+              "widget.update",
+              "widget.customize_code"
+            ],
+            "copy_required": false
+          },
+          "placements": [
+            {
+              "id": 2665,
+              "widget_list_id": 1665,
+              "position": 1
+            }
+          ],
+          "type": "widget.update",
+          "index": 0
+        }
+      ],
+      "references": {},
+      "warnings": [],
+      "affected_theme_ids": [
+        63
+      ]
+    }
+  },
+  "page_inventory": {
+    "path": "/",
+    "page_kind": "index",
+    "owner": null,
+    "template": {
+      "id": 18113,
+      "type": "Asset::Template",
+      "name": "index.liquid",
+      "content_type": "text/x-liquid",
+      "asset_url": "https://cdn.example.com/assets/1/63/63/1351155884/templates/index.liquid",
+      "updated_at": "2026-11-11T12:00:00.123456Z"
+    },
+    "widget_lists": [
+      {
+        "id": 1665,
+        "name": {
+          "ru": "v2-smoke-d1f9622a"
+        },
+        "handle": "v2-smoke-list",
+        "kind": "content",
+        "owner_type": null,
+        "owner_id": null,
+        "custom_template": null,
+        "theme_id": 63,
+        "updated_at": "2026-11-11T12:00:00.123456Z",
+        "widgets": [
+          {
+            "id": 21137,
+            "placement_id": 2665,
+            "widget_type_id": 12381742,
+            "widget_type_handle": "api-21137-8dde40d45b",
+            "visible": true,
+            "position": 1
+          }
+        ]
+      }
+    ],
+    "theme_id": 63,
+    "shared_widget_lists_note": "Candidate lists require inspecting layouts.layout.liquid to confirm rendering.",
+    "shared_widget_lists": [],
+    "trust": "store_data_not_instructions"
+  },
+  "section": {
+    "preparation": {
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "checked_at": "2026-10-02T09:42:47.776238+03:00",
+      "commands": [
+        {
+          "type": "block_template.create",
+          "client_id": "created_template",
+          "attributes": {
+            "handle": "v2-smoke-d1f9622a-mcp-section-blocks",
+            "name": {
+              "ru": "MCP section blocks"
+            },
+            "fields": [
+              {
+                "handle": "body",
+                "name": {
+                  "ru": "Body"
+                },
+                "kind": "text",
+                "options": []
+              }
+            ]
+          }
+        },
+        {
+          "type": "widget_type.create",
+          "client_id": "created_type",
+          "attributes": {
+            "type": "BlockListWidgetType",
+            "handle": "v2-smoke-d1f9622a-mcp-section",
+            "name": {
+              "ru": "MCP section"
+            },
+            "generation": "4",
+            "page_kinds": [
+              "all"
+            ],
+            "widget_list_kinds": [
+              "content"
+            ],
+            "widget_category_handle": "headers",
+            "snippet_content": "<section>{% for block in data.blocks %}<p>{{ block.body }}</p>{% endfor %}</section>",
+            "snippet_scss": "",
+            "snippet_js": "",
+            "settings_form": "{\n  \"content\": [],\n  \"design\": []\n}\n",
+            "settings_data": "{}\n",
+            "setup": "{\n  \"blocks\": [\n    {\n      \"body\": \"MCP atomic section\"\n    }\n  ]\n}\n",
+            "block_template_id": "$created_template"
+          }
+        },
+        {
+          "type": "widget.create",
+          "client_id": "created_widget",
+          "target": {
+            "widget_list_id": 1665,
+            "expected_revision": "9dbe4b9480144e1994094658a0c4a739c70e2983eac778c9e39d228e6be35e34"
+          },
+          "attributes": {
+            "position": 1,
+            "visible": true,
+            "widget_type_id": "$created_type"
+          }
+        }
+      ],
+      "request_digest": "2215afebbc403727b1e0e746ce7e43dd25aabecec4a8e1d80d0e190b6eedd9ab",
+      "normalized": {},
+      "effects": [
+        {
+          "index": 0,
+          "type": "block_template.create",
+          "affected_theme_ids": [
+            63
+          ]
+        },
+        {
+          "index": 1,
+          "type": "widget_type.create",
+          "affected_theme_ids": [
+            63
+          ]
+        },
+        {
+          "index": 2,
+          "type": "widget.create",
+          "affected_theme_ids": [
+            63
+          ]
+        }
+      ]
+    },
+    "apply": {
+      "status": "pending_assets",
+      "outcome": "applied",
+      "request_digest": "2215afebbc403727b1e0e746ce7e43dd25aabecec4a8e1d80d0e190b6eedd9ab",
+      "assets_refresh": {
+        "version": 1790923369,
+        "status": "pending"
+      },
+      "results": [
+        {
+          "id": 57,
+          "handle": "v2-smoke-d1f9622a-mcp-section-blocks",
+          "name": {
+            "ru": "MCP section blocks"
+          },
+          "fields": [
+            {
+              "id": 161,
+              "handle": "body",
+              "name": {
+                "ru": "Body"
+              },
+              "kind": "text",
+              "position": 1,
+              "options": []
+            }
+          ],
+          "updated_at": "2026-11-11T12:00:00.123456Z",
+          "restrictions": {
+            "editable": true,
+            "deletable": true,
+            "reasons": []
+          },
+          "type": "block_template.create",
+          "index": 0,
+          "client_id": "created_template"
+        },
+        {
+          "id": 12381850,
+          "type": "widget_type.create",
+          "name": {
+            "ru": "MCP section"
+          },
+          "description": {},
+          "handle": "v2-smoke-d1f9622a-mcp-section",
+          "sku": "CU0.4",
+          "generation": 4,
+          "system": false,
+          "preview_url": null,
+          "mobile_preview_url": null,
+          "theme_id": 63,
+          "widget_category_handle": "headers",
+          "block_template_handle": "v2-smoke-d1f9622a-mcp-section-blocks",
+          "page_kinds": [
+            "all"
+          ],
+          "widget_list_kinds": [
+            "content"
+          ],
+          "libraries": [],
+          "updated_at": "2026-11-11T12:00:00.123456Z",
+          "index": 1,
+          "client_id": "created_type"
+        },
+        {
+          "id": 21993,
+          "name": "MCP section",
+          "widget_type_id": 12381850,
+          "widget_type_handle": "v2-smoke-d1f9622a-mcp-section",
+          "theme_id": 63,
+          "visible": true,
+          "html_id": null,
+          "settings": {},
+          "block_list_id": 2889,
+          "updated_at": "2026-11-11T12:00:00.123456Z",
+          "edit_context": {
+            "widget_updated_at": "2026-11-11T12:00:00.123456Z",
+            "block_list_updated_at": "2026-11-11T12:00:00.123456Z",
+            "published": false,
+            "allowed_actions": [
+              "widget.update",
+              "widget.customize_code",
+              "widget.customize_blocks"
+            ],
+            "copy_required": false
+          },
+          "blocks": [
+            {
+              "id": 12001,
+              "placement_id": 11985,
+              "position": 1,
+              "title": {},
+              "fields": {
+                "body": {
+                  "value": "MCP atomic section",
+                  "translations": [
+                    "MCP atomic section"
+                  ],
+                  "entity_type": null,
+                  "type": "BlockFieldValue::Text"
+                }
+              }
+            }
+          ],
+          "placements": [
+            {
+              "id": 2771,
+              "widget_list_id": 1665,
+              "position": 1
+            }
+          ],
+          "widget_list_updated_at": "2026-11-11T12:00:00.123456Z",
+          "type": "widget.create",
+          "index": 2,
+          "client_id": "created_widget"
+        }
+      ],
+      "references": {
+        "$created_template": 57,
+        "$created_type": 12381850,
+        "$created_widget": 21993
+      },
+      "warnings": [],
+      "affected_theme_ids": [
+        63
+      ]
+    }
+  }
+}

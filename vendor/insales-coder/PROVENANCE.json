@@ -1,0 +1,35 @@
+{
+  "repository": "https://github.com/VladimirIvanin/insales-coder",
+  "commit": "5a80018cd2e69268c6f306365c367e2632f21a93",
+  "license_statement": "MIT (upstream README; no separate LICENSE file at this commit)",
+  "retrieved_at": "2026-09-21",
+  "source_path": "skills/insales-coder",
+  "bundled_files_note": "The bundled skill includes changes beyond the base commit. The hashes describe selected bundled files. See documentation_updates for the source of the widget lifecycle update.",
+  "bundled_files_sha256": {
+    "SKILL.md": "e74a836bc8ab41daba6496d374c1457dde38695519029c44dc825a385c4115d8",
+    "widget-architecture/reference.md": "aaddf4a5e0af3156d672a3a93dd4af2448cb868d82ce26fda9fbd2a23132936d",
+    "widget-architecture/editable-theme.md": "fa90bbad32e2cfe5391049fff845be37ab363346cb4a6b231cc369a1fc983abf",
+    "libraries/overlays.md": "201a7f881ffb9fc484bc5aff854a081146ae1a36d11e072c52d209c0a8119443",
+    "libraries/index.md": "c578f960c8cc73317fdf0c48913484658035b413265bd8beb48bb6e926c12251",
+    "libraries/other.md": "0d3ab0ecc84f9989fbdd8df713e24a779b13ada1033af60e7d81b524af416a8c",
+    "libraries/foundation.md": "7ecd70332da4f798b97410b57ca62f91abba632b4f5f1f9c2c34066b81915066",
+    "libraries/media.md": "fe63106170408e2055a3e799d266483c2dbab898d63a95f2eae1f7f89c7019e8",
+    "libraries/sliders.md": "d7f8a37ee32d03a81918973e147fbf4dab204fa54819c508d48325522ac6d370",
+    "libraries/navigation-filters.md": "9c67c2b31d0ab82e427943b1f7f19724483339d20fd0dddaa22ea8194648667d",
+    "splide-to-tvist/api-map.md": "632b7bae1eef36a75f34cde448306b346df9f607417fbd6d077e27f393b686f4",
+    "splide-to-tvist/patterns.md": "4efcb189f489788a2b66ba416af968b3f543bd147841ab9ac572c5d079a56faa",
+    "insales-liquid/examples/video-filters.md": "6726ef5dc271128c3b3de0d31c81a34c6945eb992db5ffab6572e247f8f2ed88",
+    "commonjs-widget/js-api.md": "4d4b48644a3c5fbcfe6211296b44805b9ae89ada8680b74a20de9060a3b84906",
+    "commonjs-widget/patterns.md": "6a734d3a605c3465deebab860d66e38b841a49b8689f0940b07a05f494748776",
+    "commonjs-widget/reference.md": "0755ccc6689a2530d9b16a46e4699e629fb153cfcfb98f44f00f4296999851ff",
+    "widget-architecture/examples/runtime/snippet.js": "2f82eb1a5bfedb4c1b63f6931836eceb0760813c257cc77b0f7c0a0c20d5c8b3",
+    "widget-architecture/runtime.md": "6ab21f8c3d5b3f56571225723c01b286756f12a6f5505a8a7b08544d5772c9e3"
+  },
+  "documentation_updates": [
+    {
+      "commit": "f30c62871b2327b50e32c114314143a517d32783",
+      "retrieved_at": "2026-11-19",
+      "scope": "Selected widget lifecycle and EventBus documentation and runtime example"
+    }
+  ]
+}

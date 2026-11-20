@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "insales": {
+      "command": "node",
+      "args": ["<repo>/bin/insales-mcp.mjs"],
+      "env": {
+        "INSALES_STORE_URL": "https://shop.myinsales.ru",
+        "INSALES_STORE_NAME": "Example shop",
+        "INSALES_API_KEY_ID": "<api-key-id>",
+        "INSALES_API_KEY_PASSWORD": "<api-key-password>",
+        "INSALES_MCP_AUTO_CLEANUP": "1",
+        "INSALES_MCP_MODE": "code",
+        "INSALES_MCP_FULL_API": "false",
+        "INSALES_MCP_ACCESS": "full"
+      }
+    }
+  }
+}

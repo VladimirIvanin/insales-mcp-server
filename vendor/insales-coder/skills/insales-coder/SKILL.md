@@ -1,0 +1,66 @@
+---
+name: insales-coder
+description: "Разработка виджетов InSales 4-го поколения: архитектура, Liquid, common.js, библиотеки из info.json, примеры snippet.js, кеш и миграция Splide→TvistV1. Применяй при создании или доработке виджетов и их Liquid/JS/SCSS."
+---
+
+# InSales Coder
+
+Единый скилл для разработки виджетов InSales 4-го поколения. Детали — в тематических справочниках ниже; читай только нужный раздел (progressive disclosure).
+
+## Обязательные правила нового виджета
+
+- `settings_form.json` поколения 4 строго содержит ровно две вкладки: `content` и `design`, обе — массивы групп с массивом `items`. Поля размещай только внутри `items`; даже пустая форма имеет вид `{"content":[],"design":[]}`. Подробный пример — [settings-reference.md](widget-architecture/settings-reference.md). `name` задаёт идентификатор поля, `label` — подпись, начальные значения храни в `settings_data.json`.
+- Если текст настройки содержит HTML (`<br>`, `<em>` и подобные теги), выбирай `type="rich-text"`, чтобы форматирование можно было изменить в редакторе. Для текста без разметки подходит `type="text"`.
+- Старые `layout-pt`/`layout-pb` при стандартном мобильном коэффициенте `4` используй с `unit: "vw"`; для `rem` или `px` нужен явный коэффициент `(0, 1]` на корне виджета. Если нужны точные отступы в пикселях, используй `layout-pt-desktop-px`, `layout-pb-desktop-px`, `layout-pt-mobile-px`, `layout-pb-mobile-px` в `settings_form.json` с `unit: "px"` и числовыми значениями в `settings_data.json`. Например, `layout-pt-desktop-px: 112` и `layout-pt-mobile-px: 64` дадут `112px` и `64px`. Новые пиксельные значения не умножаются; без мобильного значения используется десктопное.
+
+- Для любого нового виджета, независимо от страницы и темы, весь контент сделай редактируемым через настройки, блоки или сущности магазина: тексты, подписи, ссылки и изображения — через редактор; товары, цены и варианты — через каталог. У каждой настройки должно быть понятное назначение в Liquid, JS, SCSS, `core.css` / `my-layout` или механизмах платформы; отсутствие прямого обращения в Liquid само по себе не доказывает, что настройка лишняя.
+- При сборке страницы каждой самостоятельной секции дай отдельный редактируемый экземпляр. Ненужные размещения снимай с виджетлиста, не скрывай их через `limit`, `offset`, обрезку массива или пустую разметку.
+- Изображение предмета на фоне проверяй на фактическую прозрачность и видимые края: расширение `.png` не гарантирует альфа-канал.
+- Форматируй `snippet.liquid` и изменяемые Liquid-шаблоны так же внимательно, как JS, SCSS и JSON. Целая секция в одной строке недопустима. Сохраняй значимые пробелы и семантику Liquid при форматировании.
+- При ошибке локального пути загрузки перенеси картинку в разрешённый каталог MCP и повтори загрузку. Подробности и примеры — [editable-theme.md](widget-architecture/editable-theme.md).
+
+## Маршрутизация по задаче
+
+| Задача | Справочник |
+|--------|------------|
+| Создать виджет с нуля, настройки, блоки, CSS-переменные, EventBus, иконки, переводы | [widget-architecture/reference.md](widget-architecture/reference.md) |
+| Новый виджет: редактируемость контента, изображения и форматирование Liquid; сборка страницы из секций | [widget-architecture/editable-theme.md](widget-architecture/editable-theme.md) |
+| Инициализация, очистка ресурсов и независимое состояние экземпляров | [Жизненный цикл виджета](widget-architecture/runtime.md) |
+| snippet.js: Cart, Products, EventBus.listen, избранное, сравнение, поиск, ajax-компоненты, формы | [commonjs-widget/reference.md](commonjs-widget/reference.md) |
+| Выбор/проверка библиотеки в `info.json` или использование её глобального API | [libraries/index.md](libraries/index.md) — затем только нужный раздел |
+| Liquid: переменные, фильтры, объекты InSales, prefetch | [insales-liquid/reference.md](insales-liquid/reference.md) |
+| Шпаргалка полей Liquid (product, collection, cart…) | [insales-liquid/fields.md](insales-liquid/fields.md) |
+| Примеры Liquid-кода | [insales-liquid/examples/README.md](insales-liquid/examples/README.md) |
+| Замена `collection.products \| first` на `collection.menu_image` | [liquid-collection-menu-image/reference.md](liquid-collection-menu-image/reference.md) |
+| Рефакторинг ключей `{% cache %}` в виджетах | [liquid-widget-cache-keys/reference.md](liquid-widget-cache-keys/reference.md) |
+| Миграция Splide (v2/v3) → TvistV1 | [splide-to-tvist/reference.md](splide-to-tvist/reference.md) |
+
+## Порядок работы агента
+
+Скилл работает без MCP. Разрабатывайте по локальным исходникам и доступным примерам данных; отсутствие MCP не блокирует работу. Проверки, которым нужна витрина магазина, выполняйте после появления доступа к ней и до этого явно отмечайте как непроведённые.
+
+1. **Новый виджет** → `widget-architecture/reference.md` (структура файлов, info.json, settings).
+2. **После создания/правки info.json** → запустить валидатор:
+   ```bash
+   node skills/insales-coder/scripts/validate-info-json.mjs path/to/widget-folder
+   ```
+   Правила и типичные ошибки → [widget-architecture/info-json-validation.md](widget-architecture/info-json-validation.md).
+   **sku только у системных виджетов** (`handle` начинается с `system_`); у кастомных — не указывать.
+3. **Liquid в snippet.liquid** → `insales-liquid/reference.md` + при необходимости `fields.md`, `liquid-widget-cache-keys/reference.md`, `liquid-collection-menu-image/reference.md`.
+4. **JavaScript в snippet.js** → `commonjs-widget/reference.md` только при использовании common.js; при работе с библиотекой из `libraries` → `libraries/index.md`. Для нового слайдера используй краткий [справочник слайдеров](libraries/sliders.md); `splide-to-tvist/reference.md` открывай при миграции существующего Splide.
+5. **Не придумывать** поля Liquid и API common.js — сверяться со справочниками и [Liquidhub](https://liquidhub.ru/collection/shpargalka-liquid).
+6. **Перенос макета** → следовать его карте секций: каждой самостоятельной секции нужен редактируемый экземпляр виджета. Сверять главную, каталог и карточку на контрольных ширинах макета, проверять фильтры, варианты, корзину и слайдер действием в браузере. Успешное сохранение исходников не доказывает совпадения с макетом.
+   Если вместе с фрагментом HTML/вёрстки дана ссылка на референс и нет скриншота, **до реализации открыть сам референс в браузере и снять скриншоты целевой секции на широкой и узкой ширине**. HTML показывает структуру, но не передаёт итоговые размеры, композицию, наложения, цвета, типографику и поведение изображений. Запишите наблюдаемые признаки и сравните их со скриншотами собственного виджета на тех же ширинах до публикации. Если референс недоступен, явно сообщите об этом и попросите скриншот; не утверждайте, что визуальное совпадение проверено.
+7. **Перед передачей кода в MCP и публикацией виджета** → форматировать `snippet.liquid`, изменяемые Liquid-шаблоны, **`snippet.js`**, `snippet.scss` и JSON; сохранять семантику пробелов Liquid. Проверять синтаксис JS, компиляцию SCSS, подписи настроек, `my-layout`, CSS-переменные и зависимости кеша. Для слайдера использовать `snippet.js` с подходящей библиотекой (например TvistV1), если в макете ожидаются интерактивность и свайп.
+8. **Виджет карточки товара** → составьте матрицу случаев: несколько вариантов и без выбора варианта, с описанием и без, несколько фото и одно или без фото. При разработке используйте имеющиеся локальные примеры данных; если их нет, проверьте соответствующие ветви кода и оставьте браузерные сценарии непроверенными. Когда доступна витрина, выберите минимум уже существующих товаров, покрывающий матрицу. На широкой и узкой ширине прокликайте карточку: выберите вариант, добавьте его в корзину, измените количество, вернитесь к исходному состоянию; проверьте избранное и галерею, если они есть. Снимите и сравните скриншоты до и после действий: цвет, размеры, выравнивание и перенос текста кнопок и счётчика должны соответствовать дизайну во всех состояниях. Не создавайте товары в магазине для проверки без просьбы пользователя. Отметьте случаи, которые пока нельзя проверить на витрине. При наличии субагентов можно поручить независимому ревьюеру эту матрицу и скриншоты без изменений каталога и темы; исправления и итоговую проверку выполняет основной агент.
+9. **Изображения в настройках `type=file`** → при работе с магазином загрузите картинку в раздел «Файлы», выберите её в настройке виджета и проверьте сохранённое значение. Если доступен MCP, используйте `propose_theme_image_upload(destination=account_file)` и `apply_change`, передайте ID AccountFile в настройку и проверьте её через `read_theme(view=full)`. Не подставляйте постоянную ссылку на сайт референса как запасное изображение для незаполненного поля.
+
+### Если для публикации доступен MCP
+
+Для больших локальных исходников настройте абсолютный `INSALES_MCP_WIDGET_SOURCE_ROOT` и передавайте относительные пути в `source_files` для `propose_widget_section_create` или `propose_widget_code_change`. Не вставляйте длинный исходник в аргумент инструмента, в том числе при повторе после конфликта ревизии. Сверьте SHA-256 в черновике с локальными файлами; после `apply_change` прочитайте `read_theme(view=code)` и сравните сохранённые исходники и их хеши. Если первый ответ ещё содержит старый код, повторите чтение после короткой задержки. Перед правкой существующего виджета сначала прочитайте актуальный код магазина: локальный шаблон может отличаться.
+
+## Дополнительные справочники
+
+- **widget-architecture:** [editable-theme.md](widget-architecture/editable-theme.md), [info-json-validation.md](widget-architecture/info-json-validation.md), [settings-reference.md](widget-architecture/settings-reference.md), [core-css-reference.md](widget-architecture/core-css-reference.md), [icons-reference.md](widget-architecture/icons-reference.md), [icons-editor-reference.md](widget-architecture/icons-editor-reference.md)
+- **commonjs-widget:** [markup.md](commonjs-widget/markup.md), [js-api.md](commonjs-widget/js-api.md), [ajax-components.md](commonjs-widget/ajax-components.md), [forms.md](commonjs-widget/forms.md), [patterns.md](commonjs-widget/patterns.md)
+- **splide-to-tvist:** [api-map.md](splide-to-tvist/api-map.md), [patterns.md](splide-to-tvist/patterns.md), [tvist-reference.md](splide-to-tvist/tvist-reference.md)

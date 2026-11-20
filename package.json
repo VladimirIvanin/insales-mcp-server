@@ -1,0 +1,53 @@
+{
+  "name": "insales-mcp-server",
+  "version": "0.15.0",
+  "description": "Stdio MCP server for the InSales API",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "bin": {
+    "insales-mcp": "bin/insales-mcp.mjs"
+  },
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc --noEmit",
+    "prepare": "npm run build",
+    "start": "node bin/insales-mcp.mjs",
+    "cleanup": "node bin/cleanup.mjs",
+    "test": "npm run build && node --test dist/test/*.test.js",
+    "test:widget-validator": "node vendor/insales-coder/skills/insales-coder/scripts/validate-info-json.mjs --self-test",
+    "lint": "eslint src test",
+    "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts' 'bin/*.mjs'",
+    "format:check": "prettier --check 'src/**/*.ts' 'test/**/*.ts' 'bin/*.mjs'",
+    "verify": "npm run check && npm run lint && npm run format:check && npm test && npm run test:widget-validator"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "acorn": "^8.15.0",
+    "diff": "^8.0.2",
+    "ipaddr.js": "^2.3.0",
+    "postcss": "^8.5.6",
+    "postcss-scss": "^4.0.9",
+    "quickjs-emscripten": "0.32.0",
+    "undici": "^7.16.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.19.0",
+    "eslint": "^10.11.0",
+    "prettier": "^3.9.9",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.70.1"
+  },
+  "files": [
+    "bin/cleanup.mjs",
+    "bin/insales-mcp.mjs",
+    "dist/src/**/*.js",
+    "dist/src/**/*.json",
+    "knowledge/",
+    "vendor/insales-coder/",
+    "mcp.example.json"
+  ]
+}

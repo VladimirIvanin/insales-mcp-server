@@ -1,0 +1,966 @@
+[
+  {
+    "id": "target-themes-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-themes-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-themes-update",
+    "method": "PATCH",
+    "path": "/admin/theme_editor/v1/themes/:theme_id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "title",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-themes-publish",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/publish.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-themes-delete",
+    "method": "DELETE",
+    "path": "/admin/theme_editor/v1/themes/:theme_id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-themes-duplicate",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/duplicate.json",
+    "read_only": false,
+    "idempotent": true,
+    "body_fields": [
+      "title",
+      "language_id"
+    ]
+  },
+  {
+    "id": "target-themes-duplicate-status",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/theme_duplications/:job_id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-settings-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/theme_settings.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-settings-update",
+    "method": "PATCH",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/theme_settings.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "settings",
+      "locale",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-assets-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/assets.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-assets-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/assets/:id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-assets-raw",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/assets/:id/raw.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-assets-create",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/assets.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "type",
+      "name",
+      "content",
+      "attachment"
+    ]
+  },
+  {
+    "id": "target-assets-update",
+    "method": "PATCH",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/assets/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "content",
+      "attachment",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-assets-rename",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/assets/:id/rename.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "name",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-assets-delete",
+    "method": "DELETE",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/assets/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-types-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_types.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-types-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_types/:id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-types-create",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_types.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "type",
+      "name",
+      "handle",
+      "block_template_id",
+      "snippet_content",
+      "snippet_js",
+      "snippet_scss",
+      "settings_form",
+      "settings_data",
+      "setup",
+      "messages",
+      "block_settings_presets",
+      "libraries",
+      "sku",
+      "widget_category_handle",
+      "preview_base64",
+      "description",
+      "page_kinds",
+      "widget_list_kinds"
+    ]
+  },
+  {
+    "id": "target-types-update",
+    "method": "PATCH",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_types/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "name",
+      "description",
+      "snippet_content",
+      "snippet_js",
+      "snippet_scss",
+      "settings_form",
+      "settings_data",
+      "setup",
+      "messages",
+      "block_settings_presets",
+      "libraries",
+      "page_kinds",
+      "widget_list_kinds",
+      "expected_updated_at",
+      "handle",
+      "sku",
+      "widget_category_handle",
+      "block_template_id",
+      "preview_base64"
+    ]
+  },
+  {
+    "id": "target-types-copy",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_types/copy.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "source_id",
+      "name",
+      "handle",
+      "sku",
+      "widget_category_handle",
+      "block_template_id",
+      "snippet_content",
+      "snippet_scss",
+      "snippet_js",
+      "preview_base64",
+      "description",
+      "page_kinds",
+      "widget_list_kinds",
+      "libraries",
+      "settings_form",
+      "settings_data",
+      "setup",
+      "messages",
+      "block_settings_presets"
+    ]
+  },
+  {
+    "id": "target-types-delete",
+    "method": "DELETE",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_types/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-widgets-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-widgets-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-widgets-create",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "widget_type_id",
+      "widget_list_id",
+      "name",
+      "settings",
+      "html_id",
+      "position",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-widgets-update",
+    "method": "PATCH",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "name",
+      "settings",
+      "html_id",
+      "clear_settings",
+      "reset_settings",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-widgets-delete",
+    "method": "DELETE",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-widgets-duplicate",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id/duplicate.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "widget_list_id",
+      "name",
+      "html_id",
+      "position",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-widgets-custom",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id/make_custom.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-widget-blocks-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id/blocks.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-widget-blocks-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id/blocks/:block_id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-widget-blocks-create",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id/blocks.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "title",
+      "fields",
+      "position"
+    ]
+  },
+  {
+    "id": "target-widget-blocks-update",
+    "method": "PATCH",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id/blocks/:block_id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "title",
+      "fields",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-widget-blocks-delete",
+    "method": "DELETE",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id/blocks/:block_id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-widget-blocks-replace",
+    "method": "PUT",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id/blocks.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "blocks",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-widget-blocks-reorder",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id/blocks/reorder.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "block_ids",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-lists-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_lists.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-lists-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_lists/:id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-lists-create",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_lists.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "name",
+      "handle",
+      "kind",
+      "custom_template"
+    ]
+  },
+  {
+    "id": "target-lists-delete",
+    "method": "DELETE",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_lists/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-placements-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_lists/:id/widgets.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-placements-reorder",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_lists/:id/reorder.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "widget_ids",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-placements-move",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id/move.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "from_widget_list_id",
+      "to_widget_list_id",
+      "position",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-blocks-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/blocks.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-blocks-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/blocks/:id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-blocks-create",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/blocks.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "block_template_id",
+      "title",
+      "fields"
+    ]
+  },
+  {
+    "id": "target-blocks-update",
+    "method": "PATCH",
+    "path": "/admin/theme_editor/v1/blocks/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "title",
+      "fields",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-blocks-delete",
+    "method": "DELETE",
+    "path": "/admin/theme_editor/v1/blocks/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-block-lists-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/block_lists.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-block-lists-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/block_lists/:id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-block-lists-create",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/block_lists.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "name",
+      "liquid_name",
+      "block_template_id"
+    ]
+  },
+  {
+    "id": "target-block-lists-update",
+    "method": "PATCH",
+    "path": "/admin/theme_editor/v1/block_lists/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "name",
+      "liquid_name",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-block-lists-delete",
+    "method": "DELETE",
+    "path": "/admin/theme_editor/v1/block_lists/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-block-lists-replace",
+    "method": "PUT",
+    "path": "/admin/theme_editor/v1/block_lists/:block_list_id/blocks.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "items",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-block-items-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/block_lists/:block_list_id/blocks.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-block-items-add",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/block_lists/:block_list_id/blocks.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "title",
+      "fields",
+      "position"
+    ]
+  },
+  {
+    "id": "target-block-items-update",
+    "method": "PATCH",
+    "path": "/admin/theme_editor/v1/block_lists/:block_list_id/blocks/:block_id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "position",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-block-items-delete",
+    "method": "DELETE",
+    "path": "/admin/theme_editor/v1/block_lists/:block_list_id/blocks/:block_id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-block-items-reorder",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/block_lists/:block_list_id/blocks/reorder.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "block_ids",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-templates-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/block_templates.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-templates-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/block_templates/:id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-templates-create",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/block_templates.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "handle",
+      "name",
+      "fields"
+    ]
+  },
+  {
+    "id": "target-templates-update",
+    "method": "PATCH",
+    "path": "/admin/theme_editor/v1/block_templates/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "handle",
+      "name",
+      "fields",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-templates-delete",
+    "method": "DELETE",
+    "path": "/admin/theme_editor/v1/block_templates/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-system-types-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/system_widget_types.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-system-types-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/system_widget_types/:id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-snippets-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/system_snippets.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-snippets-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/system_snippets/:id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-libraries",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/libraries.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-widget-categories",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/widget_categories.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-page-structure",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/page_structure.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-template-copy",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/templates/:id/copy.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "title"
+    ]
+  },
+  {
+    "id": "target-page-template",
+    "method": "PATCH",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/page_template.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "owner_type",
+      "owner_id",
+      "custom_template",
+      "expected_updated_at"
+    ]
+  },
+  {
+    "id": "target-unique-templates-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/unique_templates.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-unique-templates-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/unique_templates/:id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-unique-templates-create",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/unique_templates.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "owner_type",
+      "owner_id",
+      "title",
+      "assign",
+      "settings"
+    ]
+  },
+  {
+    "id": "target-unique-templates-update",
+    "method": "PATCH",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/unique_templates/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "title",
+      "settings"
+    ]
+  },
+  {
+    "id": "target-profile",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/profile.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": [
+      "path",
+      "cache_mode",
+      "detail",
+      "widget_id",
+      "list_item_id"
+    ]
+  },
+  {
+    "id": "target-backups-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/backups.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-backups-create",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/backups.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-backups-status",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/backup_operations/:job_id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-files-index",
+    "method": "GET",
+    "path": "/admin/files.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-files-show",
+    "method": "GET",
+    "path": "/admin/files/:id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-files-create",
+    "method": "POST",
+    "path": "/admin/files.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": [
+      "file"
+    ]
+  },
+  {
+    "id": "target-files-delete",
+    "method": "DELETE",
+    "path": "/admin/files/:id.json",
+    "read_only": false,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-widget-types-usage",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_types/:id/usage.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-theme-history-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/history.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-theme-history-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/history/:patch_id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-type-history-index",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_types/:widget_type_id/history.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-type-history-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widget_types/:widget_type_id/history/:patch_id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  },
+  {
+    "id": "target-page-widgets",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/page_widgets.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": [
+      "path"
+    ]
+  },
+  {
+    "id": "target-widget-render",
+    "method": "POST",
+    "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:widget_id/render.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": [
+      "path"
+    ]
+  },
+  {
+    "id": "target-block-items-show",
+    "method": "GET",
+    "path": "/admin/theme_editor/v1/block_lists/:block_list_id/blocks/:block_id.json",
+    "read_only": true,
+    "idempotent": false,
+    "body_fields": []
+  }
+]
