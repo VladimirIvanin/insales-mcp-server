@@ -1,7 +1,12 @@
 {
   "name": "insales-mcp-server",
-  "version": "0.15.0",
+  "version": "1.0.0",
   "description": "Stdio MCP server for the InSales API",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladimirIvanin/insales-mcp-server.git"
+  },
   "type": "module",
   "engines": {
     "node": ">=22.13.0"
