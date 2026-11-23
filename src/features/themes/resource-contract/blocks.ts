@@ -124,7 +124,7 @@ export const widgetBlocks = [
   {
     id: 'target-widget-blocks-update',
     name: 'update_widget_block',
-    method: 'PATCH',
+    method: 'PUT',
     path: '/admin/theme_editor/v1/themes/:theme_id/widgets/:id/blocks/:block_id.json',
     title: 'Изменить один внутренний блок',
     rules:
@@ -291,7 +291,7 @@ export const widgetBlocks = [
     path: '/admin/theme_editor/v1/themes/:theme_id/widgets/:id/blocks/reorder.json',
     title: 'Изменить порядок внутренних блоков',
     rules:
-      'Не создавать и не удалять записи. Полнота набора проверяется сервером; запрос с одной страницей отклоняется. Это полная замена ранее прочитанного порядка. Поэтому optional expected_updated_at здесь защищает пользовательскую сортировку так же, как PUT/PATCH, несмотря на текущий HTTP-метод POST.',
+      'Не создавать и не удалять записи. Полнота набора проверяется сервером; запрос с одной страницей отклоняется. Это полная замена ранее прочитанного порядка. Поэтому optional expected_updated_at здесь защищает пользовательскую сортировку так же, как PUT, несмотря на текущий HTTP-метод POST.',
     idempotent: false,
     request_fields: [
       {
@@ -416,7 +416,7 @@ export const blocks = [
   {
     id: 'target-blocks-update',
     name: 'update_block',
-    method: 'PATCH',
+    method: 'PUT',
     path: '/admin/theme_editor/v1/blocks/:id.json',
     title: 'Изменить блок',
     rules:
@@ -570,7 +570,7 @@ export const blocks = [
   {
     id: 'target-block-lists-update',
     name: 'update_block_panel',
-    method: 'PATCH',
+    method: 'PUT',
     path: '/admin/theme_editor/v1/block_lists/:id.json',
     title: 'Изменить панель блоков',
     rules:
@@ -776,7 +776,7 @@ export const blocks = [
   {
     id: 'target-block-items-update',
     name: 'update_panel_block',
-    method: 'PATCH',
+    method: 'PUT',
     path: '/admin/theme_editor/v1/block_lists/:block_list_id/blocks/:block_id.json',
     title: 'Изменить позицию блока в панели',
     rules:
@@ -857,7 +857,7 @@ export const blocks = [
     path: '/admin/theme_editor/v1/block_lists/:block_list_id/blocks/reorder.json',
     title: 'Изменить порядок блоков панели',
     rules:
-      'Только самостоятельная панель; внутренние списки Widget по этому адресу недоступны. Полный состав, без дублей и чужих ID. Одна страница пагинации не считается полным составом. Это полная замена ранее прочитанного порядка. Поэтому optional expected_updated_at здесь защищает пользовательскую сортировку так же, как PUT/PATCH, несмотря на текущий HTTP-метод POST. Состав панели — множество блоков. ID внутренних BlockListItem не публикуются и не принимаются. id в элементах ответа/полной замены и block_id в адресе всегда обозначают сам блок. Панель определяется отдельным block_list_id в пути; у одной панели может быть много блоков.',
+      'Только самостоятельная панель; внутренние списки Widget по этому адресу недоступны. Полный состав, без дублей и чужих ID. Одна страница пагинации не считается полным составом. Это полная замена ранее прочитанного порядка. Поэтому optional expected_updated_at здесь защищает пользовательскую сортировку так же, как PUT, несмотря на текущий HTTP-метод POST. Состав панели — множество блоков. ID внутренних BlockListItem не публикуются и не принимаются. id в элементах ответа/полной замены и block_id в адресе всегда обозначают сам блок. Панель определяется отдельным block_list_id в пути; у одной панели может быть много блоков.',
     idempotent: false,
     request_fields: [
       {
@@ -1046,7 +1046,7 @@ export const blocks = [
   {
     id: 'target-templates-update',
     name: 'update_block_template',
-    method: 'PATCH',
+    method: 'PUT',
     path: '/admin/theme_editor/v1/block_templates/:id.json',
     title: 'Изменить пользовательскую схему',
     rules:

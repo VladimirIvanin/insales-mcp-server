@@ -50,7 +50,7 @@ function fixture(t: TestContext) {
   };
 }
 
-test('a widget PATCH sends one request with the original timestamp and object settings', async (t) => {
+test('a widget PUT sends one request with the original timestamp and object settings', async (t) => {
   const { service, calls } = fixture(t);
   const body = {
     expected_updated_at: '2026-11-11T12:00:00.123456Z',
@@ -66,7 +66,7 @@ test('a widget PATCH sends one request with the original timestamp and object se
   assert.equal(result.status, 'applied');
   assert.equal(calls.length, 1);
   assert.deepEqual(calls[0], {
-    method: 'PATCH',
+    method: 'PUT',
     path: '/admin/theme_editor/v1/themes/7/widgets/8.json',
     body,
     options: {},
@@ -135,7 +135,7 @@ test('an expired unknown creation is never resent', async (t) => {
   assert.equal(calls.length, 1);
 });
 
-test('an unknown PATCH cannot be replayed as a fresh write', async (t) => {
+test('an unknown PUT cannot be replayed as a fresh write', async (t) => {
   const { service, calls, loseResponse } = fixture(t);
   const id = randomUUID();
   loseResponse();

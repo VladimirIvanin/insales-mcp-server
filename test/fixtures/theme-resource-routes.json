@@ -17,7 +17,7 @@
   },
   {
     "id": "target-themes-update",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/admin/theme_editor/v1/themes/:theme_id.json",
     "read_only": false,
     "idempotent": false,
@@ -75,7 +75,7 @@
   },
   {
     "id": "target-settings-update",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/admin/theme_editor/v1/themes/:theme_id/theme_settings.json",
     "read_only": false,
     "idempotent": false,
@@ -124,7 +124,7 @@
   },
   {
     "id": "target-assets-update",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/admin/theme_editor/v1/themes/:theme_id/assets/:id.json",
     "read_only": false,
     "idempotent": false,
@@ -201,7 +201,7 @@
   },
   {
     "id": "target-types-update",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/admin/theme_editor/v1/themes/:theme_id/widget_types/:id.json",
     "read_only": false,
     "idempotent": false,
@@ -299,7 +299,7 @@
   },
   {
     "id": "target-widgets-update",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id.json",
     "read_only": false,
     "idempotent": false,
@@ -376,7 +376,7 @@
   },
   {
     "id": "target-widget-blocks-update",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/admin/theme_editor/v1/themes/:theme_id/widgets/:id/blocks/:block_id.json",
     "read_only": false,
     "idempotent": false,
@@ -519,7 +519,7 @@
   },
   {
     "id": "target-blocks-update",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/admin/theme_editor/v1/blocks/:id.json",
     "read_only": false,
     "idempotent": false,
@@ -569,7 +569,7 @@
   },
   {
     "id": "target-block-lists-update",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/admin/theme_editor/v1/block_lists/:id.json",
     "read_only": false,
     "idempotent": false,
@@ -622,7 +622,7 @@
   },
   {
     "id": "target-block-items-update",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/admin/theme_editor/v1/block_lists/:block_list_id/blocks/:block_id.json",
     "read_only": false,
     "idempotent": false,
@@ -682,7 +682,7 @@
   },
   {
     "id": "target-templates-update",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/admin/theme_editor/v1/block_templates/:id.json",
     "read_only": false,
     "idempotent": false,
@@ -771,7 +771,7 @@
   },
   {
     "id": "target-page-template",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/admin/theme_editor/v1/themes/:theme_id/page_template.json",
     "read_only": false,
     "idempotent": false,
@@ -814,7 +814,7 @@
   },
   {
     "id": "target-unique-templates-update",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/admin/theme_editor/v1/themes/:theme_id/unique_templates/:id.json",
     "read_only": false,
     "idempotent": false,

@@ -73,7 +73,7 @@ export const pageTemplates = [
   {
     id: 'target-page-template',
     name: 'assign_page_template',
-    method: 'PATCH',
+    method: 'PUT',
     path: '/admin/theme_editor/v1/themes/:theme_id/page_template.json',
     title: 'Назначить или сбросить шаблон страницы',
     rules:
@@ -277,7 +277,7 @@ export const pageTemplates = [
   {
     id: 'target-unique-templates-update',
     name: 'update_unique_template',
-    method: 'PATCH',
+    method: 'PUT',
     path: '/admin/theme_editor/v1/themes/:theme_id/unique_templates/:id.json',
     title: 'Изменить уникальный шаблон',
     rules:

@@ -3,7 +3,7 @@ import { isAbsolute, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
-export const VERSION = '1.0.1';
+export const VERSION = '1.1.0';
 export class Fault extends Error {
   constructor(
     public code: string,

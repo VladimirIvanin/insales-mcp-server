@@ -179,7 +179,7 @@ const transportStore: Store = { id: 'one', name: 'Test', url: 'https://test.myin
 const transportCredentials = { key: 'key', password: 'password' };
 const transportPath = '/admin/pages/1.json';
 
-test('widget PATCH exposes the Qrator support ID and logs no page or source', async (t) => {
+test('widget PUT exposes the Qrator support ID and logs no page or source', async (t) => {
   const directory = mkdtempSync(join(tmpdir(), 'insales-qrator-'));
   t.after(() => rmSync(directory, { recursive: true, force: true }));
   const supportId = '12345678-1234-4321-abcd-123456789abc';
@@ -196,7 +196,7 @@ test('widget PATCH exposes the Qrator support ID and logs no page or source', as
     http.request(
       transportStore,
       transportCredentials,
-      'PATCH',
+      'PUT',
       '/admin/theme_editor/v1/themes/7/widget_types/8.json',
       { snippet_content: 'private-source' },
     ),
@@ -271,7 +271,7 @@ test('JSON content type follows presence of a request body', async () => {
   });
   await http.request(transportStore, transportCredentials, 'GET', transportPath);
   await http.request(transportStore, transportCredentials, 'DELETE', transportPath);
-  await http.request(transportStore, transportCredentials, 'PATCH', transportPath, {});
+  await http.request(transportStore, transportCredentials, 'PUT', transportPath, {});
   assert.deepEqual(seen, [
     [null, undefined],
     [null, undefined],
@@ -287,7 +287,7 @@ test('validation errors keep nested field paths in both response formats', async
       async () => new Response(JSON.stringify({ errors }), { status: 422 }),
     );
     await assert.rejects(
-      http.request(transportStore, transportCredentials, 'PATCH', transportPath, {}),
+      http.request(transportStore, transportCredentials, 'PUT', transportPath, {}),
       {
         code: 'validation_failed',
         details: { http_status: 422, validation_errors: [{ field, message: 'Required' }] },

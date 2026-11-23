@@ -148,7 +148,7 @@ export const themeAssets = [
   {
     id: 'target-assets-update',
     name: 'update_theme_asset',
-    method: 'PATCH',
+    method: 'PUT',
     path: '/admin/theme_editor/v1/themes/:theme_id/assets/:id.json',
     title: 'Обновить содержимое файла',
     rules:

@@ -34,7 +34,7 @@ export const themesAndSettings = [
   {
     id: 'target-themes-update',
     name: 'update_theme',
-    method: 'PATCH',
+    method: 'PUT',
     path: '/admin/theme_editor/v1/themes/:theme_id.json',
     title: 'Изменить тему',
     rules:
@@ -213,7 +213,7 @@ export const themesAndSettings = [
   {
     id: 'target-settings-update',
     name: 'update_theme_settings',
-    method: 'PATCH',
+    method: 'PUT',
     path: '/admin/theme_editor/v1/themes/:theme_id/theme_settings.json',
     title: 'Изменить настройки темы',
     rules:

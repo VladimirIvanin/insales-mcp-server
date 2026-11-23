@@ -48,7 +48,7 @@ JSON-поля settings_form/settings_data/setup/messages/block_settings_presets 
 Liquid/CSS/JS — строки. settings_form сохраняет content/design и группы с items.
 `get_widget_standards` содержит правила и диагностику разработки.
 
-PATCH меняет только переданные ключи settings/fields, значение ключа заменяется целиком.
+Обновление через PUT меняет только переданные ключи settings/fields, значение ключа заменяется целиком.
 clear_settings очищает значение, reset_settings восстанавливает default; пересечения — ошибка.
 Полный состав блоков заменяет replace_widget_blocks: переданный ID сохраняется,
 запись без ID создаётся, пропущенная удаляется. Порядок массива — порядок блоков.

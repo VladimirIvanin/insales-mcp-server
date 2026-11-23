@@ -125,11 +125,11 @@ test('theme restrictions and published operation paths are enforced before trans
   });
   await api.request('one', 'GET', '/admin/theme_editor/v1/themes/10/widgets/2.json');
   await api.request('one', 'POST', '/admin/theme_editor/v1/themes/10/widgets/2/render.json');
-  await api.request('one', 'PATCH', '/admin/theme_editor/v1/themes/9/widgets/2.json');
-  await api.request('one', 'PATCH', '/admin/theme_editor/v1/block_lists/2.json');
+  await api.request('one', 'PUT', '/admin/theme_editor/v1/themes/9/widgets/2.json');
+  await api.request('one', 'PUT', '/admin/theme_editor/v1/block_lists/2.json');
   const before = calls.length;
   for (const [method, path] of [
-    ['PATCH', '/admin/theme_editor/v1/themes/10/widgets/2.json'],
+    ['PUT', '/admin/theme_editor/v1/themes/10/widgets/2.json'],
     ['POST', '/admin/theme_editor/v1/themes/9/publish.json'],
     ['POST', '/admin/theme_editor/v1/themes/9/duplicate.json'],
     ['PUT', '/admin/themes/10/assets/2.json'],
@@ -214,12 +214,12 @@ test('theme_files allows theme and file writes and blocks the rest', async (t) =
     rmSync(directory, { recursive: true, force: true });
   });
 
-  await api.request('one', 'PATCH', '/admin/theme_editor/v1/themes/9/widgets/2.json', {});
+  await api.request('one', 'PUT', '/admin/theme_editor/v1/themes/9/widgets/2.json', {});
   await api.request('one', 'PUT', '/admin/themes/9/assets/2.json', {});
   await api.request('one', 'POST', '/admin/files.json', {});
   await api.request('one', 'GET', '/admin/products/14.json');
   assert.deepEqual(calls, [
-    'PATCH /admin/theme_editor/v1/themes/9/widgets/2.json',
+    'PUT /admin/theme_editor/v1/themes/9/widgets/2.json',
     'PUT /admin/themes/9/assets/2.json',
     'POST /admin/files.json',
     'GET /admin/products/14.json',
@@ -235,7 +235,7 @@ test('theme_files allows theme and file writes and blocks the rest', async (t) =
   ] as const)
     await assert.rejects(api.request('one', method, path, {}), { code: 'write_restricted' });
   await assert.rejects(
-    api.request('one', 'PATCH', '/admin/theme_editor/v1/themes/10/widgets/2.json', {}),
+    api.request('one', 'PUT', '/admin/theme_editor/v1/themes/10/widgets/2.json', {}),
     { code: 'theme_write_restricted' },
   );
   assert.equal(calls.length, before);
