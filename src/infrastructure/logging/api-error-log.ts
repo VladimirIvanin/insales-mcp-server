@@ -26,6 +26,7 @@ export interface ApiErrorEvent {
   response_content_type?: string;
   response_bytes?: number;
   request_id?: string;
+  support_id?: string;
   transport_error?: string;
 }
 

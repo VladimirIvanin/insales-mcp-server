@@ -18,6 +18,7 @@
 |---|---|
 | authentication_required | Проверить `INSALES_API_KEY_ID`/`INSALES_API_KEY_PASSWORD` в конфигурации MCP и перезапустить процесс; пароль агенту не передавать |
 | permission_denied | Проверить права ключа и привязку объекта |
+| request_blocked | Qrator отклонил запрос. Передайте поддержке время запроса, HTTP-метод, путь и полученные `support_id` или `request_id`. |
 | payment_required | InSales ограничил доступ к неоплаченной теме |
 | conflict | Прочитать новое состояние и подготовить новый diff |
 | validation_failed | Исправить данные; успех не объявлять |

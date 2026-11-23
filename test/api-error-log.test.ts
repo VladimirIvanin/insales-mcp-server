@@ -179,6 +179,71 @@ const transportStore: Store = { id: 'one', name: 'Test', url: 'https://test.myin
 const transportCredentials = { key: 'key', password: 'password' };
 const transportPath = '/admin/pages/1.json';
 
+test('widget PATCH exposes the Qrator support ID and logs no page or source', async (t) => {
+  const directory = mkdtempSync(join(tmpdir(), 'insales-qrator-'));
+  t.after(() => rmSync(directory, { recursive: true, force: true }));
+  const supportId = '12345678-1234-4321-abcd-123456789abc';
+  const http = new HttpTransport(
+    undefined,
+    async () =>
+      new Response(
+        `<html><p>Qrator Labs</p><b>Support ID:</b> ${supportId}<p>private-page</p></html>`,
+        { status: 403, headers: { 'content-type': 'text/html', 'x-request-id': 'req-403' } },
+      ),
+    new ApiErrorLog(directory),
+  );
+  await assert.rejects(
+    http.request(
+      transportStore,
+      transportCredentials,
+      'PATCH',
+      '/admin/theme_editor/v1/themes/7/widget_types/8.json',
+      { snippet_content: 'private-source' },
+    ),
+    {
+      code: 'request_blocked',
+      details: { http_status: 403, support_id: supportId, request_id: 'req-403' },
+    },
+  );
+  const entry = readFileSync(join(directory, readdirSync(directory)[0]!), 'utf8');
+  assert.equal(JSON.parse(entry).support_id, supportId);
+  assert.doesNotMatch(entry, /private-page|private-source/);
+});
+
+test('theme duplication distinguishes an API permission error from a Qrator page', async () => {
+  const http = new HttpTransport(undefined, async () =>
+    Response.json({ status: 'error', message: 'Недостаточно прав для операции' }, { status: 403 }),
+  );
+  await assert.rejects(
+    http.request(
+      transportStore,
+      transportCredentials,
+      'POST',
+      '/admin/theme_editor/v1/themes/7/duplicate.json',
+      { title: 'Copy' },
+    ),
+    {
+      code: 'permission_denied',
+      message: 'Недостаточно прав для операции (HTTP 403).',
+      details: { http_status: 403 },
+    },
+  );
+});
+
+test('generic HTML keeps the original 403 and invalid support IDs stay private', async () => {
+  for (const [html, code] of [
+    ['<html>Access denied</html>', 'permission_denied'],
+    ['<html>Access denied for user qrator</html>', 'permission_denied'],
+    ['<html>Qrator Labs. ID: private-page-token</html>', 'request_blocked'],
+  ] as const) {
+    const http = new HttpTransport(undefined, async () => new Response(html, { status: 403 }));
+    await assert.rejects(http.request(transportStore, transportCredentials, 'GET', transportPath), {
+      code,
+      details: { http_status: 403 },
+    });
+  }
+});
+
 test('empty HTTP responses preserve success and error semantics', async () => {
   let status = 204;
   const http = new HttpTransport(undefined, async () => new Response(null, { status }));
@@ -229,6 +294,31 @@ test('validation errors keep nested field paths in both response formats', async
       },
     );
   }
+});
+
+test('API error metadata is not reported as invalid input fields', async () => {
+  const http = new HttpTransport(undefined, async () =>
+    Response.json(
+      {
+        code: 'not_a_block_widget',
+        message: 'У виджета нет блочного контента.',
+        outcome: 'not_applied',
+      },
+      { status: 422 },
+    ),
+  );
+  await assert.rejects(
+    http.request(
+      transportStore,
+      transportCredentials,
+      'GET',
+      '/admin/theme_editor/v1/themes/7/widgets/8/blocks.json',
+    ),
+    {
+      code: 'validation_failed',
+      details: { http_status: 422 },
+    },
+  );
 });
 
 test('known HTTP status survives an unreadable or oversized body', async () => {

@@ -150,6 +150,8 @@ function validationErrors(parsed: unknown): { field: string; message: string }[]
     'errors' in parsed && parsed.errors && typeof parsed.errors === 'object'
       ? parsed.errors
       : parsed;
+  if (source === parsed && typeof parsed.code === 'string' && typeof parsed.message === 'string')
+    return [];
   const result: { field: string; message: string }[] = [];
   if (Array.isArray(source)) {
     for (const rawItem of source.slice(0, 12) as unknown[]) {
@@ -192,6 +194,18 @@ function retryAfterSeconds(header: string | null) {
 }
 
 const knownRejection = new Set([401, 403, 404, 409, 422, 429]);
+
+function qratorBlockPage(text: string, contentType?: string) {
+  const page = text.slice(0, 64 * 1024);
+  if (contentType !== 'text/html' && !/^\s*(?:<!doctype html\b|<html\b)/i.test(page)) return;
+  if (!/\bqrator\b/i.test(page)) return;
+  const visibleText = page.replace(/<[^<>]*>/g, ' ').replace(/&nbsp;/gi, ' ');
+  const supportId = visibleText.match(
+    /(?:\bid\b|идентификатор(?:\s+запроса)?)\s*[:#№]?\s*([\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12})\b/i,
+  )?.[1];
+  if (!supportId && !/\bqrator(?:\s+labs\b|\.net\b)/i.test(page)) return;
+  return { supportId };
+}
 
 export function classifyHttpStatus(status: number, write: boolean, data?: unknown) {
   const codes: Record<number, string> = {
@@ -293,6 +307,7 @@ export class HttpTransport implements Transport {
     let responseContentType: string | undefined;
     let responseBytes: number | undefined;
     let requestId: string | undefined;
+    let supportId: string | undefined;
     let transportError: string | undefined;
     try {
       let response;
@@ -379,6 +394,7 @@ export class HttpTransport implements Transport {
             `InSales вернул HTTP ${status}.`,
             {
               http_status: status,
+              ...(requestId ? { request_id: requestId } : {}),
               ...(status === 429
                 ? { retry_after_seconds: retryAfterSeconds(response.headers.get('retry-after')) }
                 : {}),
@@ -407,15 +423,39 @@ export class HttpTransport implements Transport {
             parsed = undefined;
           }
         }
+        const requestDetails = requestId ? { request_id: requestId } : {};
+        if (status === 403 && parsed === undefined) {
+          const block = qratorBlockPage(text, responseContentType);
+          if (block) {
+            supportId = block.supportId;
+            throw new Fault('request_blocked', 'Qrator отклонил запрос (HTTP 403).', {
+              http_status: status,
+              ...requestDetails,
+              ...(supportId ? { support_id: supportId } : {}),
+            });
+          }
+        }
         const code = classifyHttpStatus(status, method !== 'GET', parsed);
+        const deniedByApi =
+          code === 'permission_denied' &&
+          isRecord(parsed) &&
+          parsed.status === 'error' &&
+          parsed.message === 'Недостаточно прав для операции';
         const errors = status === 422 && text.length <= 16 * 1024 ? validationErrors(parsed) : [];
-        throw new Fault(code, `InSales вернул HTTP ${status}.`, {
-          http_status: status,
-          ...(errors.length ? { validation_errors: errors } : {}),
-          ...(status === 429
-            ? { retry_after_seconds: retryAfterSeconds(response.headers.get('retry-after')) }
-            : {}),
-        });
+        throw new Fault(
+          code,
+          deniedByApi
+            ? 'Недостаточно прав для операции (HTTP 403).'
+            : `InSales вернул HTTP ${status}.`,
+          {
+            http_status: status,
+            ...requestDetails,
+            ...(errors.length ? { validation_errors: errors } : {}),
+            ...(status === 429
+              ? { retry_after_seconds: retryAfterSeconds(response.headers.get('retry-after')) }
+              : {}),
+          },
+        );
       }
       try {
         phase = 'parse_response';
@@ -447,6 +487,7 @@ export class HttpTransport implements Transport {
             ...(responseContentType ? { response_content_type: responseContentType } : {}),
             ...(responseBytes === undefined ? {} : { response_bytes: responseBytes }),
             ...(requestId ? { request_id: requestId } : {}),
+            ...(supportId ? { support_id: supportId } : {}),
             ...(transportError ? { transport_error: transportError } : {}),
           });
         } catch {

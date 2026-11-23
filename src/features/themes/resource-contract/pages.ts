@@ -351,7 +351,7 @@ export const pageTemplates = [
     path: '/admin/theme_editor/v1/themes/:theme_id/profile.json',
     title: 'Профилировать Liquid страницы',
     rules:
-      'Диагностика Liquid без изменения темы. Для приложения используется право чтения темы (themes#show). list_item_id ограничивает детализацию конкретным вхождением виджета.',
+      'Диагностика Liquid без изменения темы. Для приложения требуется право изменения темы (themes#update). list_item_id ограничивает детализацию конкретным вхождением виджета.',
     idempotent: false,
     request_fields: [
       {

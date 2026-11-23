@@ -16,6 +16,7 @@ export class Fault extends Error {
 const definiteRejections = new Set([
   'validation_failed',
   'permission_denied',
+  'request_blocked',
   'payment_required',
   'not_found',
   'rate_limited',
